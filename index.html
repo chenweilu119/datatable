@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>汇总查询</title>
+<meta name="keywords" content="datatable,多条件,筛选">
+<meta name="description" content="实现datatable的多条件筛选">
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+	<body style="margin:20px auto;width:900px;">
+	<form action="AggregateQuerySearch" method="post">
+	<fieldset class="fieldset" style="width:95%;margin:0 auto;">
+		<legend class="legend" style="width:160px;margin-left:20px;">请选择汇总条件</legend>
+	<div class="parent fieldsetSearch" style="padding:10px; margin-left:2%">
+		<div style="margin-bottom:10px;">
+			<label style="width:120px;">按申请时间汇总：</label>
+			<input type="text"  placeholder=" 年-月-日"  name="searchCondition['applytime1']" data-date-format="yyyy-mm-dd" class="datetimepicker1 start1" style="width:20%; display:inline-block; height:30px;"> 至
+			<input type="text"  placeholder=" 年-月-日"  name="searchCondition['applytime2']" data-date-format="yyyy-mm-dd" class="datetimepicker2 start2" style="width:20%; display:inline-block; height:30px;">
+		</div>
+		<div style="margin-bottom:10px;">
+			<label style="width:120px;">按结题时间汇总：</label>
+			<input type="text"  placeholder=" 年-月-日"  name="searchCondition['deadline1']" data-date-format="yyyy-mm-dd" class="datetimepicker3 end1" style="width:20%; display:inline-block; height:30px;"> 至
+			<input type="text"  placeholder=" 年-月-日"  name="searchCondition['deadline2']" data-date-format="yyyy-mm-dd"  class="datetimepicker4 end2" style="width:20%; display:inline-block; height:30px;">
+		</div>
+		<div style="margin-bottom:10px;">
+			<label style="width:120px;">按课题类型汇总：</label>
+			  <input type="checkbox"  class="projectionType" name="searchCondition['projectionType']" value="一般类" style="margin-top:-3px;"> 一般类&nbsp;&nbsp;
+			  <input type="checkbox"  class="projectionType" name="searchCondition['projectionType']" value="资助类" style="margin-top:-3px;margin-left:25px;"> 资助类&nbsp;&nbsp;
+			  <input type="checkbox"  class="projectionType" name="searchCondition['projectionType']" value="招标类" style="margin-top:-3px;margin-left:25px;"> 招标类&nbsp;
+			
+		</div>
+		<div style="margin-bottom:10px; vertical-align:center;">
+			<label style="width:115px; float:left;margin-top:7px;margin-right:12px;">按学科分类汇总：</label>
+			<table style="width:600px;display:inline-block; margin-left:-3px;">
+			<tr>
+				<td><input type="checkbox" class="type" value="马列、科社" style="margin-top:-3px;"> 马列、科社&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="哲学" style="margin-top:-3px;"> 哲学&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="政法" style="margin-top:-3px;"> 政法&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="理论经济" style="margin-top:-3px;"> 理论经济&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="应用经济" style="margin-top:-3px;"> 应用经济&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="管理" style="margin-top:-3px;"> 管理&nbsp;&nbsp;</td>
+				<td><input type="checkbox" class="type" value="社会" style="margin-top:-3px;"> 社会&nbsp;&nbsp;</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" class="type" value="历史" style="margin-top:-3px;"> 历史&nbsp;</td>
+				<td><input type="checkbox" class="type" value="文学" style="margin-top:-3px;"> 文学&nbsp;</td>
+				<td><input type="checkbox" class="type" value="新闻" style="margin-top:-3px;"> 新闻&nbsp;</td>
+				<td><input type="checkbox" class="type" value="语言" style="margin-top:-3px;"> 语言&nbsp;</td>
+				<td><input type="checkbox" class="type" value="教育" style="margin-top:-3px;"> 教育&nbsp;</td>
+				<td><input type="checkbox" class="type" value="文化" style="margin-top:-3px;"> 文化&nbsp;</td>
+				<td><input type="checkbox" class="type"  value="其他" style="margin-top:-3px;"> 其他&nbsp;</td>
+			</tr>
+		    </table>
+		</div>
+   		<a class="btn btn-primary f-ib filter"  style="margin-left:230px;margin-right:20px;
+   		margin-top:10px;width:80px;color:#fff;">搜 索</a>
+		<a class="btn btn-primary f-ib clear" style="width:80px;margin-top:10px;color:#fff;">清 除</a>
+	</div>
+	</fieldset>	
+    <br/> <br /> 
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<table class="table table-hover table-borderSelf3 datatable" width="100%">
+				<thead>
+					<tr>
+						<th width="6%" >序号</th>
+						<th width="18%">课题名称</th>
+						<th width="10%">状态</th>
+						<th width="10%">学科分类</th>
+						<th width="9%">负责人</th>
+						<th width="10%">课题类型</th>
+						<th width="14%">起止日期</th>
+						<th width="8%">经费(万元)</th>
+					</tr>
+				</thead>
+				<tbody >
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">aaaaa</td>
+						<td style="text-align:center;padding:0">通过</td>
+						<td style="text-align:center;padding:0">马列、科社</td>
+						<td style="text-align:center;padding:0">a</td>
+						<td style="text-align:center;padding:0">一般类</td>
+						<td class="date" style="text-align:center;padding:0">2015-01-01至2016-01-01</td>
+						<td style="text-align:center;padding:0">100000</td>
+					</tr>
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">bbbbb</td>
+						<td style="text-align:center;padding:0">拒绝</td>
+						<td style="text-align:center;padding:0">文学</td>
+						<td style="text-align:center;padding:0">b</td>
+						<td style="text-align:center;padding:0">招标类</td>
+						<td class="date" style="text-align:center;padding:0">2013-01-01至2017-01-01</td>
+						<td style="text-align:center;padding:0">200000</td>
+					</tr>
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">ccccc</td>
+						<td style="text-align:center;padding:0">通过</td>
+						<td style="text-align:center;padding:0">马列、科社</td>
+						<td style="text-align:center;padding:0">c</td>
+						<td style="text-align:center;padding:0">资助类</td>
+						<td class="date" style="text-align:center;padding:0">2013-01-01至2014-01-01</td>
+						<td style="text-align:center;padding:0">100500</td>
+					</tr>
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">ddddd</td>
+						<td style="text-align:center;padding:0">通过</td>
+						<td style="text-align:center;padding:0">新闻</td>
+						<td style="text-align:center;padding:0">d</td>
+						<td style="text-align:center;padding:0">一般类</td>
+						<td class="date" style="text-align:center;padding:0">2013-01-01至2014-01-01</td>
+						<td style="text-align:center;padding:0">1000000</td>
+					</tr>
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">eeeee</td>
+						<td style="text-align:center;padding:0">通过</td>
+						<td style="text-align:center;padding:0">历史</td>
+						<td style="text-align:center;padding:0">e</td>
+						<td style="text-align:center;padding:0">一般类</td>
+						<td class="date" style="text-align:center;padding:0">2015-01-01至2018-01-01</td>
+						<td style="text-align:center;padding:0">1002000</td>
+					</tr>
+					<tr class="line" >
+					    <td style="text-align:center;padding:0"></td>
+						<td style="text-align:center;padding:0">fffff</td>
+						<td style="text-align:center;padding:0">通过</td>
+						<td style="text-align:center;padding:0">教育</td>
+						<td style="text-align:center;padding:0">f</td>
+						<td style="text-align:center;padding:0">一般类</td>
+						<td class="date" style="text-align:center;padding:0">2010-01-01至2013-01-01</td>
+						<td style="text-align:center;padding:0">100000</td>
+					</tr>
+			  </tbody>
+			</table>
+		</div>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.js"></script>
+	
+	<script type="text/javascript" src="http://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="http://cdn.bootcss.com/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script>
+$('.datetimepicker1, .datetimepicker2,.datetimepicker3,.datetimepicker4').datetimepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    minView: "month",
+    maxView: "decade",
+    todayBtn: true,
+});
+
+$.fn.dataTable.ext.search.push(
+	    function( settings, data, dataIndex ) {
+			var start1 = new Date($(".start1").val().replace(/-/g,"-"));//第一个申请时间
+		    var start2 = new Date($(".start2").val().replace(/-/g,"-"));//第二个申请时间
+			var end1 = new Date($(".end1").val().replace(/-/g,"-"));//第一个结题时间
+			var end2 = new Date($(".end2").val().replace(/-/g,"-"));//第二个结题时间
+	        var start = new Date(data[6].substring(0,data[6].indexOf("至")).replace(/-/g,"-"));//表格中的申请时间
+	        var end = new Date(data[6].substring(data[6].indexOf("至")+1,data[6].length).replace(/-/g,"-"));//表格中的结题时间
+	        var projectionType = data[5];//表格中的课题类型
+	        var pt = new Array();//存储选中的课题类型
+		    var type = new Array();//存储选中的学科分类
+        	$(".projectionType:checked").each(function(){
+ 	            pt.push($(this).val());
+ 	          })
+ 	          $(".type:checked").each(function(){
+ 	            type.push($(this).val());
+ 	          })
+
+ 	        //判断表格中的每一条数据，是否在筛选范围内
+	        if ( (( isNaN( start1 ) && isNaN( start2 ) ) ||( isNaN( start1 ) && start <= start2 ) || ( start1  <= start   && isNaN( start2 ) ) ||( start1  <= start   && start <= start2 ) )&&
+	        		(( isNaN( end1 ) && isNaN( end2 ) ) ||( isNaN( end1 ) && end <= end2 ) || ( end1  <= end   && isNaN( end2 ) ) ||( end1  <= end   && end <= end2 ) )&&
+	        		((pt.length==0)||($.inArray(projectionType,pt)>=0))&&
+	        		((type.length==0)||($.inArray(data[3],type)>=0)))
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
+	);
+$(document).ready(function() {
+    var t = $('.datatable').DataTable({
+    	"iDisplayLength":5, //一页显示几行
+    	"bLengthChange":false,//开关，是否显示一个每页长度的选择条（需要分页器支持）
+        "columnDefs": [{ //这个字段可以对列进行很多操作,
+            "searchable": false, //不在搜索范围内
+            "orderable": false, //不排序
+            "targets": 0,    //第1列
+        }],
+        "order": [[1, 'asc']], //按第二列升序，降序是desc
+        "oLanguage": {   //对应的中文显示
+			"sProcessing":   "处理中...",
+		    "sLengthMenu":   "_MENU_ 记录/页",
+		    "sZeroRecords":  "没有匹配的记录",
+		    "sInfo":         "显示第 _START_ 至 _END_ 项记录，共 _TOTAL_ 项",
+		    "sInfoEmpty":    "显示第 0 至 0 项记录，共 0 项",
+		    "sInfoFiltered": "(由 _MAX_ 项记录过滤)",
+		    "sInfoPostFix":  "",
+		    "sSearch":       "模糊搜索:",
+		    "sUrl":          "",
+		    "oPaginate": {
+		     "sFirst":    "首页",
+		     "sPrevious": "上页",
+		     "sNext":     "下页",
+		     "sLast":     "末页"
+		    }
+		} 
+    });
+    t.on('order.dt search.dt',//给第一列加上序号
+    function() {
+        t.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+
+    // 按搜索按钮进行自定义筛选
+    $('.filter').click( function() {
+        t.draw(); 
+    } );
+
+    //清除设置的条件
+    $(".clear").click(function(){
+    	 $('.datetimepicker1, .datetimepicker2,.datetimepicker3,.datetimepicker4').val("");
+    	 $('.projectionType').removeAttr("checked");
+    	 $('.type').removeAttr("checked");
+    	 t.draw(); 
+    })
+});
+</script>
+	</div>
+</form>
+</body>
+</html>
